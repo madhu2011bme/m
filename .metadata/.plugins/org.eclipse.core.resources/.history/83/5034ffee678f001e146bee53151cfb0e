@@ -1,0 +1,38 @@
+package com.seleniumconcepts;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class MyntraLocator
+{
+public static WebDriver driver;
+	public static void main(String[] args) {
+		System.setProperty("webdriver.chrome.driver", "E:\\eclipse-workspace\\IPT_Training\\chrome\\chromedriver.exe");
+		driver=new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://www.myntra.com/kids?f=Categories%3ATshirts%3A%3AGender%3Aboys%2Cboys%20girls&plaEnabled=false");
+		List<WebElement> kids_tshirt_price = driver.findElements(By.xpath("//span[@class='product-discountedPrice']"));
+		System.out.println(kids_tshirt_price.size());
+		System.out.println("List of Products");
+		List<Integer> l=new ArrayList<>();
+		for(WebElement price:kids_tshirt_price) {
+			String List_of_price = price.getText().replace("Rs. ","");
+			System.out.println(List_of_price);
+			Integer pricelist=Integer.parseInt(List_of_price);
+			System.out.println(pricelist);
+			l.add(pricelist);
+				}
+		Integer min_price= Collections.min(l);
+		Integer max_price= Collections.max(l);
+		System.out.println("Minimum priced product: "+min_price);
+		System.out.println("Minimum priced product: "+max_price);
+	}}

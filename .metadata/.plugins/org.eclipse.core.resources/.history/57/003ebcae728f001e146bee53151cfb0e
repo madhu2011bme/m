@@ -1,0 +1,33 @@
+package com.seleniumconcepts;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import com.google.common.collect.Multiset.Entry;
+
+public class Finding_Duplicate_Instring {
+
+	public static void main(String[] args) {
+		String s="manual testing api automation testing api testing";
+		Map<String, Integer> m=new HashMap<>();
+		String[] allWords=s.split(" ");
+		for(String words:allWords) {
+			if(m.containsKey(words)) {
+				Integer value = m.get(words);
+				m.put(words, value+1);
+			}
+			else {
+				m.put(words, 1);
+			}
+		}
+System.out.println(m);
+Set<Entry<String, Integer>> entrySet = m.entrySet();
+for(Entry<String,Integer> entry:entrySet) {
+	if(entry.getValue()>1) {
+		System.out.println(entry);
+	}
+}
+	}
+
+}
